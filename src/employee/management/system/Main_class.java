@@ -65,8 +65,7 @@ public class Main_class extends JFrame{
 
     }
 
-    public static void main(){
+    public static void main(String[] args) {
         new Main_class();
-
     }
 }

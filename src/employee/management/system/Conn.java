@@ -6,21 +6,31 @@ import java.sql.Statement;
 
 public class Conn {
 
-    Connection connection;
+    // ── Database credentials ──────────────────────────────────────────
+    private static final String DB_URL  = "jdbc:mysql://localhost:3306/employeemanagement";
+    private static final String DB_USER = "root";
+    private static final String DB_PASS = "admin123";
+    // ─────────────────────────────────────────────────────────────────
 
-    Statement statement;
-
+    public Connection connection;
+    public Statement  statement;
 
     public Conn() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/employeemanagement","root","WJ28@krhps");
-            statement = connection.createStatement();
-        }catch (Exception E){
-            E.printStackTrace();
-
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            statement  = connection.createStatement();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-
+    public void close() {
+        try {
+            if (statement  != null) statement.close();
+            if (connection != null) connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
