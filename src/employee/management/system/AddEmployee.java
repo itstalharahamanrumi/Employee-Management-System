@@ -1,202 +1,329 @@
 package employee.management.system;
 
 import com.toedter.calendar.JDateChooser;
-
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.awt.geom.*;
 import java.util.Random;
 
 public class AddEmployee extends JFrame implements ActionListener {
-    Random rand=new Random();
-    int number = rand.nextInt(999999);
+
+    // ── Palette — same as Login, Splash, Main_class ────────────────────
+    private static final Color NAVY         = new Color( 26,  54, 105);
+    private static final Color NAVY_DARK    = new Color( 18,  38,  76);
+    private static final Color WHITE        = Color.WHITE;
+    private static final Color BG           = new Color(245, 247, 251);
+    private static final Color INPUT_BG     = new Color(248, 250, 253);
+    private static final Color BORDER_NORM  = new Color(210, 218, 230);
+    private static final Color BORDER_FOCUS = new Color( 66, 153, 225);
+    private static final Color TEXT_DARK    = new Color( 22,  36,  71);
+    private static final Color TEXT_GRAY    = new Color(100, 115, 140);
+    private static final Color TEXT_DIM     = new Color(160, 170, 185);
+    private static final Color BTN_GREEN    = new Color( 34, 139,  87);
+    private static final Color BTN_GREEN_H  = new Color( 22, 108,  67);
+    private static final Color BADGE_BG     = new Color(232, 245, 239);
+    private static final Color BADGE_FG     = new Color( 22, 101,  52);
+
+    // ── Auto-generated Employee ID ────────────────────────────────────
+    private final String empId = String.format("EMP%06d", new Random().nextInt(999999));
 
     JTextField tname, tfname, taddress, tphone, temail, tsalary, tdesignation;
-
-    JLabel tempid;
-
-    JButton add, back;
-
-
+    JButton btnAdd, btnBack;
     JDateChooser tdob;
+    JComboBox<String> boxEducation;
 
-    JComboBox Boxeducation;
-
-
-    AddEmployee(){
-
-
-        getContentPane().setBackground(new Color(230,255,188));
-
-        JLabel heading = new JLabel("Add Employee Details");
-        heading.setForeground(Color.black);
-        heading.setBounds(320,30,500,50);
-        heading.setFont(new Font("SERIF",Font.BOLD,25));
-        add(heading);
-
-
-        JLabel name = new JLabel("Name:");
-        name.setBounds(50,150,150,30);
-        name.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        add(name);
-
-        tname = new JTextField();
-        tname.setBounds(200,150,150,30);
-        tname.setBackground(new Color(230,255,188));
-        add(tname);
-
-        JLabel fname = new JLabel("Father's Name:");
-        fname.setBounds(400,150,150,30);
-        fname.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        add(fname);
-
-        tfname = new JTextField();
-        tfname.setBounds(600,150,150,30);
-        tfname.setBackground(new Color(230,255,188));
-        add(tfname);
-
-        JLabel dob = new JLabel("Date of Birth:");
-        dob.setBounds(50,200,150,30);
-        dob.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        add(dob);
-
-        tdob = new JDateChooser();
-        tdob.setBounds(200,200,150,30);
-        tdob.setBackground(new Color(230,255,188));
-        add(tdob);
-
-
-        JLabel salary = new JLabel("Salary:");
-        salary.setBounds(400,200,150,30);
-        salary.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        add(salary);
-
-        tsalary = new JTextField();
-        tsalary.setBounds(600,200,150,30);
-        tsalary.setBackground(new Color(230,255,188));
-        add(tsalary);
-
-        JLabel address = new JLabel("Address:");
-        address.setBounds(50,250,150,30);
-        address.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        add(address);
-
-        taddress = new JTextField();
-        taddress.setBounds(200,250,150,30);
-        taddress.setBackground(new Color(230,255,188));
-        add(taddress);
-
-        JLabel phone = new JLabel("Phone:");
-        phone.setBounds(400,250,150,30);
-        phone.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        add(phone);
-
-        tphone = new JTextField();
-        tphone.setBounds(600,250,150,30);
-        tphone.setBackground(new Color(230,255,188));
-        add(tphone);
-
-        JLabel email = new JLabel("Email:");
-        email.setBounds(50,300,150,30);
-        email.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        add(email);
-
-        temail = new JTextField();
-        temail.setBounds(200,300,150,30);
-        temail.setBackground(new Color(230,255,188));
-        add(temail);
-
-        JLabel education = new JLabel("Eduational Qualification:");
-        education.setBounds(400,300,150,30);
-        education.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        add(education);
-
-        String items[] = {" ","CSE", "BBA", "LLB", "CE", "TE", "ME", "EEE", "ENGLISH"};
-        Boxeducation = new JComboBox(items);
-        Boxeducation.setBackground(new Color(230,255,188));
-        Boxeducation.setBounds(600,300,150,30);
-        add(Boxeducation);
-
-        JLabel designation = new JLabel("Designation:");
-        designation.setBounds(50,350,150,30);
-        designation.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        add(designation);
-
-        tdesignation = new JTextField();
-        tdesignation.setBounds(200,350,150,30);
-        tdesignation.setBackground(new Color(230,255,188));
-        add(tdesignation);
-
-        JLabel empid = new JLabel("Employee ID:");
-        empid.setBounds(400,350,150,30);
-        empid.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        add(empid);
-
-        tempid = new JLabel(""+number);
-        tempid.setBounds(600,350,150,30);
-        tempid.setFont(new Font("SAN_SERIF",Font.BOLD,20));
-        tempid.setForeground(Color.red);
-        add(tempid);
-
-
-        add = new JButton("ADD");
-        add.setBounds(450,550,150,40);
-        add.setBackground(Color.black);
-        add.setForeground(Color.white);
-        add.addActionListener(this);
-        add(add);
-
-        back = new JButton("BACK");
-        back.setBounds(250,550,150,40);
-        back.setBackground(Color.black);
-        back.setForeground(Color.white);
-        back.addActionListener(this);
-        add(back);
-
-
-        setTitle("Add Employee");
-        setSize(900,700);
+    AddEmployee() {
+        setTitle("Add New Employee — Employee Management System");
+        setSize(1100, 700);
+        setLocationRelativeTo(null);
         setLayout(null);
-        setLocation(300,50);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) { dispose(); new Main_class(); }
+        });
+
+        // ── Full-window background panel ──────────────────────────────
+        JPanel bg = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,      RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
+                int W = getWidth(), H = getHeight();
+
+                // Page background
+                g2.setColor(BG);
+                g2.fillRect(0, 0, W, H);
+
+                // Navy header bar
+                g2.setPaint(new GradientPaint(0, 0, NAVY, W, 0, NAVY_DARK));
+                g2.fillRect(0, 0, W, 80);
+
+                // Header text
+                g2.setColor(WHITE);
+                g2.setFont(new Font("SansSerif", Font.BOLD, 20));
+                g2.drawString("Add New Employee", 28, 36);
+                g2.setColor(new Color(180, 200, 230));
+                g2.setFont(new Font("SansSerif", Font.PLAIN, 12));
+                g2.drawString("Fill in all fields to add a record to the database", 28, 57);
+
+                // Back arrow in header (top-right)
+                g2.setColor(new Color(255, 255, 255, 90));
+                g2.fillRoundRect(W - 146, 22, 118, 36, 8, 8);
+
+                // Form card
+                g2.setColor(WHITE);
+                g2.fill(new RoundRectangle2D.Float(24, 90, W - 48, H - 140, 12, 12));
+                g2.setColor(new Color(218, 224, 235));
+                g2.setStroke(new BasicStroke(1f));
+                g2.draw(new RoundRectangle2D.Float(24, 90, W - 48, H - 140, 12, 12));
+
+                // Section label inside card
+                g2.setColor(TEXT_GRAY);
+                g2.setFont(new Font("SansSerif", Font.BOLD, 10));
+                g2.drawString("EMPLOYEE INFORMATION", 44, 110);
+
+                // Divider below section label
+                g2.setColor(new Color(235, 238, 245));
+                g2.setStroke(new BasicStroke(1f));
+                g2.drawLine(44, 118, W - 44, 118);
+
+                // Footer bar
+                g2.setColor(new Color(235, 238, 245));
+                g2.fillRect(0, H - 40, W, 40);
+                g2.setColor(new Color(218, 224, 235));
+                g2.setStroke(new BasicStroke(1f));
+                g2.drawLine(0, H - 40, W, H - 40);
+                g2.setColor(TEXT_DIM);
+                g2.setFont(new Font("SansSerif", Font.PLAIN, 10));
+                FontMetrics fm = g2.getFontMetrics();
+                String copy = "© 2025 Employee Management System  ·  v1.0.0";
+                g2.drawString(copy, W / 2 - fm.stringWidth(copy) / 2, H - 14);
+            }
+        };
+        bg.setBounds(0, 0, 1100, 700);
+        bg.setLayout(null);
+        add(bg);
+
+        // ── Form fields: 2-column layout ─────────────────────────────
+        // Left col: x=42, w=360   |   Right col: x=518, w=360
+        // Rows: label y, field y+20, row stride = 92px
+
+        // Row 1 — Name | Father's Name
+        addLabel(bg, "Name",          42,  130); tname   = addInput(bg, 42,  150, 360);
+        addLabel(bg, "Father's Name", 518, 130); tfname  = addInput(bg, 518, 150, 360);
+
+        // Row 2 — Date of Birth | Salary
+        addLabel(bg, "Date of Birth",  42, 222);
+        tdob = new JDateChooser();
+        tdob.setBounds(42, 242, 360, 36);
+        tdob.setBackground(INPUT_BG);
+        tdob.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        bg.add(tdob);
+
+        addLabel(bg, "Salary (BDT)", 518, 222); tsalary = addInput(bg, 518, 242, 360);
+
+        // Row 3 — Address | Phone
+        addLabel(bg, "Address",      42,  314); taddress = addInput(bg, 42,  334, 360);
+        addLabel(bg, "Phone Number", 518, 314); tphone   = addInput(bg, 518, 334, 360);
+
+        // Row 4 — Email | Education
+        addLabel(bg, "Email Address", 42, 406); temail = addInput(bg, 42, 426, 360);
+
+        addLabel(bg, "Education", 518, 406);
+        String[] eduItems = {"-- Select Qualification --", "CSE", "BBA", "LLB", "CE", "TE", "ME", "EEE", "English"};
+        boxEducation = new JComboBox<>(eduItems);
+        boxEducation.setBounds(518, 426, 360, 36);
+        boxEducation.setBackground(WHITE);
+        boxEducation.setForeground(TEXT_DARK);
+        boxEducation.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        boxEducation.setBorder(new LineBorder(BORDER_NORM, 1));
+        bg.add(boxEducation);
+
+        // Row 5 — Designation | Employee ID (read-only badge)
+        addLabel(bg, "Designation",               42,  498); tdesignation = addInput(bg, 42, 518, 360);
+        addLabel(bg, "Employee ID (Auto-Generated)", 518, 498);
+
+        // Green badge showing the auto-generated ID
+        JPanel idBadge = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(BADGE_BG);
+                g2.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), 8, 8));
+                g2.setColor(new Color(BADGE_FG.getRed(), BADGE_FG.getGreen(), BADGE_FG.getBlue(), 80));
+                g2.setStroke(new BasicStroke(1f));
+                g2.draw(new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 8, 8));
+                g2.setColor(BADGE_FG);
+                g2.setFont(new Font("SansSerif", Font.BOLD, 14));
+                FontMetrics fm = g2.getFontMetrics();
+                g2.drawString(empId, getWidth() / 2 - fm.stringWidth(empId) / 2,
+                        getHeight() / 2 + fm.getAscent() / 2 - 2);
+            }
+        };
+        idBadge.setOpaque(false);
+        idBadge.setBounds(518, 518, 360, 36);
+        bg.add(idBadge);
+
+        // ── Buttons ───────────────────────────────────────────────────
+        btnBack = new JButton("← Back to Dashboard");
+        btnBack.setBounds(42, 590, 200, 36);
+        styleSecondaryBtn(btnBack);
+        btnBack.addActionListener(this);
+        bg.add(btnBack);
+
+        btnAdd = new JButton("Add Employee");
+        btnAdd.setBounds(656, 590, 222, 36);
+        stylePrimaryBtn(btnAdd, BTN_GREEN, BTN_GREEN_H);
+        btnAdd.addActionListener(this);
+        bg.add(btnAdd);
+
+        getRootPane().setDefaultButton(btnAdd); // Enter key fires Add
         setVisible(true);
-
-
     }
 
-    public void actionPerformed(ActionEvent e){
-        if(e.getSource()==add){
-            String name = tname.getText();
-            String fname = tfname.getText();
-            String address = taddress.getText();
-            String phone = tphone.getText();
-            String email = temail.getText();
-            String education = (String) Boxeducation.getSelectedItem();
-            String dob = ((JTextField) tdob.getDateEditor().getUiComponent()).getText();
-            String salary = tsalary.getText();
-            String designation = tdesignation.getText();
-            String empid = tempid.getText();
+    // ── Helpers ───────────────────────────────────────────────────────
 
-            try{
+    private void addLabel(JPanel parent, String text, int x, int y) {
+        JLabel lbl = new JLabel(text);
+        lbl.setBounds(x, y, 360, 18);
+        lbl.setFont(new Font("SansSerif", Font.BOLD, 11));
+        lbl.setForeground(TEXT_GRAY);
+        parent.add(lbl);
+    }
+
+    private JTextField addInput(JPanel parent, int x, int y, int w) {
+        JTextField tf = new JTextField();
+        tf.setBounds(x, y, w, 36);
+        tf.setBackground(INPUT_BG);
+        tf.setForeground(TEXT_DARK);
+        tf.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        tf.setCaretColor(NAVY);
+        tf.setBorder(new CompoundBorder(
+                new LineBorder(BORDER_NORM, 1),
+                BorderFactory.createEmptyBorder(0, 10, 0, 10)));
+        tf.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                tf.setBorder(new CompoundBorder(
+                        new LineBorder(BORDER_FOCUS, 2),
+                        BorderFactory.createEmptyBorder(0, 9, 0, 9)));
+            }
+            public void focusLost(FocusEvent e) {
+                tf.setBorder(new CompoundBorder(
+                        new LineBorder(BORDER_NORM, 1),
+                        BorderFactory.createEmptyBorder(0, 10, 0, 10)));
+            }
+        });
+        parent.add(tf);
+        return tf;
+    }
+
+    private void stylePrimaryBtn(JButton btn, Color bg, Color hover) {
+        btn.setBackground(bg);
+        btn.setForeground(WHITE);
+        btn.setFont(new Font("SansSerif", Font.BOLD, 13));
+        btn.setFocusPainted(false);
+        btn.setBorder(BorderFactory.createEmptyBorder(6, 16, 6, 16));
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) { btn.setBackground(hover); }
+            public void mouseExited (MouseEvent e) { btn.setBackground(bg); }
+        });
+    }
+
+    private void styleSecondaryBtn(JButton btn) {
+        btn.setBackground(BG);
+        btn.setForeground(TEXT_GRAY);
+        btn.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        btn.setFocusPainted(false);
+        btn.setBorder(new LineBorder(BORDER_NORM, 1));
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) { btn.setForeground(NAVY); btn.setBorder(new LineBorder(NAVY, 1)); }
+            public void mouseExited (MouseEvent e) { btn.setForeground(TEXT_GRAY); btn.setBorder(new LineBorder(BORDER_NORM, 1)); }
+        });
+    }
+
+    // ── Action handler ────────────────────────────────────────────────
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnAdd) {
+
+            String name        = tname.getText().trim();
+            String fname       = tfname.getText().trim();
+            String address     = taddress.getText().trim();
+            String phone       = tphone.getText().trim();
+            String email       = temail.getText().trim();
+            String salary      = tsalary.getText().trim();
+            String designation = tdesignation.getText().trim();
+            String education   = (String) boxEducation.getSelectedItem();
+            String dob         = ((JTextField) tdob.getDateEditor().getUiComponent()).getText().trim();
+
+            // ── Validation ────────────────────────────────────────────
+            if (name.isEmpty() || fname.isEmpty() || address.isEmpty()
+                    || phone.isEmpty() || email.isEmpty()
+                    || salary.isEmpty() || designation.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Please fill in all text fields before saving.",
+                        "Missing Information", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (dob.isEmpty() || dob.replaceAll("[^0-9]", "").isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Please select a Date of Birth from the calendar.",
+                        "Missing Information", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (education == null || education.startsWith("--")) {
+                JOptionPane.showMessageDialog(this,
+                        "Please select an Education qualification.",
+                        "Missing Information", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // ── Insert into database ──────────────────────────────────
+            try {
                 Conn c = new Conn();
-                String query = "insert into employee values('"+name+"', '"+fname+"', '"+address+"', '"+phone+"', '"+email+"','"+education+"', '"+dob+"', '"+salary+"','"+designation+"', '"+empid+"')";
+                String query = "INSERT INTO employee VALUES('"
+                        + name        + "', '"
+                        + fname       + "', '"
+                        + address     + "', '"
+                        + phone       + "', '"
+                        + email       + "', '"
+                        + education   + "', '"
+                        + dob         + "', '"
+                        + salary      + "', '"
+                        + designation + "', '"
+                        + empId       + "')";
                 c.statement.execute(query);
-                JOptionPane.showMessageDialog(null, "Employee Added Successfully");
-                setVisible(false);
+                c.close();
+                JOptionPane.showMessageDialog(this,
+                        "Employee \"" + name + "\" added successfully!\nEmployee ID: " + empId,
+                        "Employee Added", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
                 new Main_class();
 
-            }catch (Exception E){
-                E.printStackTrace();
-
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this,
+                        "Database error: " + ex.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
+
         } else {
-            setVisible(false);
+            // Back button
+            dispose();
             new Main_class();
         }
     }
 
     public static void main(String[] args) {
-        new AddEmployee();
-
+        SwingUtilities.invokeLater(AddEmployee::new);
     }
 }
